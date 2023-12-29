@@ -125,3 +125,47 @@ FROM employees e
 		JOIN departments d
 		ON (d.dept_no = de.dept_no)
 ORDER BY 1;
+
+-- 5.
+SELECT 
+	e.first_name,
+	e.last_name,
+	e.sex
+FROM employees e
+WHERE e.first_name = 'Hercules'
+AND e.last_name LIKE 'B%';
+
+-- 6.
+SELECT 
+	d.dept_name,
+	e.emp_no,
+	e.last_name,
+	e.first_name
+FROM employees e
+	JOIN dept_emp de
+	ON (de.emp_no = e.emp_no)
+		JOIN departments d
+		ON (d.dept_no = de.dept_no)
+		WHERE d.dept_name = 'Sales';
+
+-- 7.
+SELECT 
+	d.dept_name,
+	e.emp_no,
+	e.last_name,
+	e.first_name
+FROM employees e
+	JOIN dept_emp de
+	ON (de.emp_no = e.emp_no)
+		JOIN departments d
+		ON (d.dept_no = de.dept_no)
+		WHERE d.dept_name = 'Sales'
+		OR d.dept_name = 'Development';
+		
+-- 8.
+SELECT last_name, COUNT(last_name)
+FROM employees
+GROUP BY last_name
+ORDER BY 2 DESC;
+
+
