@@ -73,4 +73,55 @@ REFERENCES "employees" ("emp_no");
 ALTER TABLE "salaries" ADD CONSTRAINT "fk_salaries_emp_no" FOREIGN KEY("emp_no")
 REFERENCES "employees" ("emp_no");
 
+SELECT * FROM departments;
 SELECT * FROM dept_emp;
+SELECT * FROM dept_manager;
+SELECT * FROM employees;
+SELECT * FROM salaries;
+SELECT * FROM titles;
+
+-- 1.
+SELECT 
+	e.emp_no,
+	e.last_name, 
+	e.first_name, 
+	e.sex,
+	s.salary
+FROM employees e
+RIGHT JOIN salaries s
+ON s.emp_no = e.emp_no;
+
+-- 2.
+SELECT 
+	e.first_name, 
+	e.last_name,
+	e.hire_date
+FROM employees e
+WHERE EXTRACT(YEAR FROM hire_date) = 1986;
+
+-- 3.
+SELECT
+	d.dept_no,
+	d.dept_name,
+	m.emp_no AS manager_emp_no,
+	e.first_name,
+	e.last_name
+FROM departments d
+	JOIN dept_manager m
+	ON (m.dept_no = d.dept_no)
+		JOIN employees e
+		ON (e.emp_no = m.emp_no);
+
+-- 4.
+SELECT
+	e.emp_no,
+	e.last_name,
+	e.first_name,
+	d.dept_no,
+	d.dept_name
+FROM employees e
+	JOIN dept_emp de
+	ON (de.emp_no = e.emp_no)
+		JOIN departments d
+		ON (d.dept_no = de.dept_no)
+ORDER BY 1;
