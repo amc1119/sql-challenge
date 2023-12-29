@@ -81,7 +81,7 @@ FROM employees e
 		OR d.dept_name = 'Development';
 		
 -- 8.
-SELECT last_name, COUNT(last_name)
+SELECT last_name AS employee_last_name, COUNT(last_name)
 FROM employees
 GROUP BY last_name
 ORDER BY 2 DESC;
